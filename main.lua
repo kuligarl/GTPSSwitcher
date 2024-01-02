@@ -109,8 +109,15 @@ function deleteGTPS()
     local allGTPSData = g:read("a")
     local allHostData = h:read("a")
     openFiles("w+")
+
     allGTPSData = string.gsub(allGTPSData, GTPSname .. "\n" .. removelinetotal .. "\n", "")
+    allGTPSData = string.gsub(allGTPSData,"\n" .. GTPSname .. "\n" .. removelinetotal, "")
+    allGTPSData = string.gsub(allGTPSData,GTPSname .. "\n" .. removelinetotal, "")
+
+    allHostData = string.gsub(allHostData, removehosts .. "\n", "")
+    allHostData = string.gsub(allHostData, "\n" .. removehosts, "")
     allHostData = string.gsub(allHostData, removehosts, "")
+
     writeFiles(allGTPSData, allHostData)
     closeFiles()
 end
@@ -150,6 +157,7 @@ function switchGTPS()
     hostsfile = io.open("C:/Windows/System32/drivers/etc/hosts", "r")
     if hostsfile then
         AllHostfileData = hostsfile:read('a')
+        hostsfile:close()
     end
     AllHostfileData = string.gsub(AllHostfileData, currenthost, string.format(switchhost))
     hostsfile = io.open("C:/Windows/System32/drivers/etc/hosts", "w+")
@@ -163,40 +171,12 @@ function switchGTPS()
     if AllHostfileData == hostsfile:read('a') then
         print("\nSwitched to " .. GTPSname .. '\n')
     else
-        print("\n*Switch unsuccesful. Check if you're running as administrator.\n")
+        print("\n* -- !! Switch unsuccesful. Check if you're running as administrator. -- !! *\n")
     end
     end
 end
 end
 
-function changeName(name)
-    local newName = input("New name:")
-end
-    
-
-function editGTPS()
-    local hosts = ""
-    local GTPSname = input("GTPS name: ")
-    for k,v in pairs(savedgtpses) do
-        if v == GTPSname then
-            hosts = gtpshosts[k]
-            break
-        end
-    end
-
-    local act = input("What do you want to change?\n\nname - GTPS name\nHosts - GTPS hosts\nboth - GTPS name and host.")
-        if act == "name" then
-            changeName()
-            interface()
-        elseif act == "hosts" then
-            changeHosts()
-            interface()
-        elseif act == "both" then
-            changeName(GTPSname)
-            changeHosts(hosts)
-            interface()
-        end
-end
 function interface()
     local GTPSlist = ""
     for k,v in pairs(savedgtpses) do
@@ -204,7 +184,7 @@ function interface()
     end
 
     print("Welcome to GTPS Switcher!\n\nSaved GTPS-es:\n" .. GTPSlist .. "\nWhat do you want to do?\n\nsave - Save a new GTPS\nswitch - Switch GTPS\ndelete - Delete a GTPS\nquit - Exit the program")
-    print("*Note: This progam won't work unless you run it as administrator.")
+    print("*Note: This progam won't work unless you run it as administrator.\nEverything is case sensitive.")
     local act = io.read()
 
     if act == "save" then
