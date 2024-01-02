@@ -69,7 +69,7 @@ function SaveGTPS()
     table.insert(savedgtpses, GTPSname)
 
     local hostlinestotal = 0
-    local i = 0|nil
+    local i = 0
     while true do
         i = string.find(hosts, ",", i+1)
         if not i then break end
@@ -171,6 +171,7 @@ end
 
 function changeName(name)
     local newName = input("New name:")
+end
     
 
 function editGTPS()
@@ -195,6 +196,7 @@ function editGTPS()
             changeHosts(hosts)
             interface()
         end
+end
 function interface()
     local GTPSlist = ""
     for k,v in pairs(savedgtpses) do
