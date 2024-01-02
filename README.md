@@ -8,8 +8,7 @@ Running as administrator necessary.
 
 Lets say you have the following hosts: 
 
-52.89.5.222 www.growtopia1.com
-52.89.5.222 www.growtopia2.com
+52.89.5.222 www.growtopia1.com\n52.89.5.222 www.growtopia2.com
 
 When the following prompt shows up
 
