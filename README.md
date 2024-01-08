@@ -18,3 +18,6 @@ When the following prompt shows up
 You must type the hosts in like this:
 
 52.89.5.222 www.growtopia1.com,52.89.5.222 www.growtopia2.com (the "," replacing the "ENTER" key)
+
+# IF YOU ENCOUNTER ANY PROBLEMS CONTACT ME HERE:
+Discord - kuligarl
